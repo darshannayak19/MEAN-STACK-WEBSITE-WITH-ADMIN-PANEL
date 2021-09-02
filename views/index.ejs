@@ -287,22 +287,22 @@
                 </div>
             </div>
             <div class="contactForm">
-                <form>
+                <form onsubmit="contactForm()" method="POST">
                     <h2>Send Message</h2>
                     <div class="inputBox">
-                        <input type="text" name="" required="required">
+                        <input id="Cname" type="text" name="" required="required">
                         <span>Full Name</span>
                     </div>
                     <div class="inputBox">
-                        <input type="text" name="" required="required">
+                        <input id="Cmail" type="text" name="" required="required">
                         <span>Email</span>
                     </div>
                     <div class="inputBox">
-                        <textarea required="required" cols="30" rows="10"></textarea>
+                        <textarea id="Ctext" required="required" cols="30" rows="10"></textarea>
                         <span>Type Your Message.....</span>
                     </div>
                     <div class="inputBox">
-                        <input type="submit" name="" value="Submit">
+                    <input type="submit" name="" value="Submit">
                     </div>
                 </form>
             </div>
@@ -313,7 +313,7 @@
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.064737006725!2d80.00637346544593!3d23.204311265333075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3981aed5325ee325%3A0x1e68e68bd26ffb7d!2sChandan%20Colony%2C%20Jabalpur%2C%20Madhya%20Pradesh%20482011!5e0!3m2!1sen!2sin!4v1627627522407!5m2!1sen!2sin" style="width: 99.7%;height: 450px;" loading="lazy"></iframe>
     <div class="Footer">
         <h4 style="margin-top: 15px;">+91-9425151322</h4>
-        <h4 style="margin-top: 15px;">©2020 by MathsGuru. Proudly created with Darshan Nayak</h4>
+        <h4 style="margin-top: 15px;">©2020 by MathsGuru. Proudly created By Darshan Nayak</h4>
     </div>
     </div>
     <script type="text/javascript">
@@ -361,6 +361,24 @@
               }
           });
         });
+        function contactForm() {
+                const name = $('#Cname').val();
+                        const email = $('#Cmail').val();
+                        const text = $('#Ctext').val();
+                        $.ajax({
+                            url: "/Cemail",
+                            method: "POST",
+                            data: { name: name, email: email, text: text },
+                            success: function (response) {
+                                alert("success");
+                                window.location.href="/index";
+                            },
+                            error: function (response) {
+                                alert("Email not Sent!");
+                                window.history.go(-1);
+                            }
+                        })
+                    }
     var counter=1;
     setInterval(function(){
         document.getElementById('radio'+counter).checked = true;
