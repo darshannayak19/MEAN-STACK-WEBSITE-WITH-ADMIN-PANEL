@@ -287,7 +287,7 @@
                 </div>
             </div>
             <div class="contactForm">
-                <form onsubmit="contactForm()" method="POST">
+                <form onsubmit="contactForm()"  method="POST">
                     <h2>Send Message</h2>
                     <div class="inputBox">
                         <input id="Cname" type="text" name="" required="required">
@@ -371,11 +371,10 @@
                             data: { name: name, email: email, text: text },
                             success: function (response) {
                                 alert("success");
-                                window.location.href="/index";
+                                window.location.href="/";
                             },
                             error: function (response) {
                                 alert("Email not Sent!");
-                                window.history.go(-1);
                             }
                         })
                     }

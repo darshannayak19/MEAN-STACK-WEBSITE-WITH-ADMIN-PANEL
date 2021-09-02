@@ -11,7 +11,6 @@ const Gridfs = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const fs  = require('fs');
 var path = require('path');
-
 const fileModel = require('../models/fileSchema');
 const { error, Console } = require('console');
 const { response } = require('express');
@@ -19,12 +18,24 @@ const { response } = require('express');
 const { GridFSBucket } = require('mongodb');
 var flash = require('connect-flash');
 var session = require('express-session');
-
-router.use(session({ cookie: { maxAge: 60000 }, 
-                  secret: 'woot',
-                  resave: false, 
-                  saveUninitialized: false}));
-router.use(flash());
+const nodemailer = require('nodemailer');
+const { text } = require('body-parser');
+const smtpTrans = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+      auth: {
+    user: "nayakleon@gmail.com",
+    pass: "rhspxzuilcfwxtdu"
+  },
+  });
+  smtpTrans.verify((res,error) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Ready to Send");
+  }
+});
 // Middleware
 router.use(bodyParser.json());
    /* GET home page. */
@@ -33,10 +44,6 @@ router.use(bodyParser.json());
    });
   router.get('/table',function(req,res){
     res.render('table');
-  });
-
-  router.get('/index',function(req,res){
-    res.render('index');
   });
    
   /* POST user registration page. */
@@ -135,9 +142,9 @@ function findUserByEmail(email){
       res.render('login');
    });
 router.post('/login', function (req, res, next) {
-	//console.log(req.body);
+	console.log(req.body);
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/dbusers";
+var url = "mongodb+srv://darshan:darshannayak007@cluster0.qatqn.mongodb.net/dbusers?retryWrites=true&w=majority";
 
 MongoClient.connect(url, function(err, db) {
   var dbo = db.db("dbusers");
@@ -166,7 +173,7 @@ MongoClient.connect(url, function(err, db) {
 });
 
 
-const mongouri = 'mongodb://localhost:27017/uploads'
+const mongouri = 'mongodb+srv://darshan:darshannayak007@cluster0.qatqn.mongodb.net/uploads?retryWrites=true&w=majority'
 
 const conn = mongoose.createConnection(mongouri,{ useNewUrlParser: true,useUnifiedTopology: true } );
 
@@ -274,4 +281,29 @@ MongoClient.connect(mongouri, function(err, db) {
   });
 });
 });
+
+router.post('/Cemail', (req, res) => {
+
+  console.log(req.body.name);
+  // Specify what the email will look like
+  const mailOpts = {
+    from: req.body.email, // This is ignored by Gmail
+    to: "nayakleon@gmail.com",
+    subject: "Contact Form Submission",
+    html: `<p>Name: ${req.body.name}</p>
+           <p>Email: ${req.body.email}</p>
+           <p>Message: ${req.body.text}</p>`,
+  }
+  // Attempt to send the email
+  res.render('index');
+  smtpTrans.sendMail(mailOpts, (error) => {
+     if (error) {
+       console.log("error");
+      res.json({ status: "ERROR" });
+    } else {
+      console.log("Success");
+      res.json({ response: "success" });
+    }
+  })
+})
 module.exports = router;

@@ -12,7 +12,7 @@ var flash = require('connect-flash');
 
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/dbusers');
+mongoose.connect('mongodb+srv://darshan:darshannayak007@cluster0.qatqn.mongodb.net/dbusers?retryWrites=true&w=majority');
 require("./models/User");
 
 var index = require('./routes/index');
