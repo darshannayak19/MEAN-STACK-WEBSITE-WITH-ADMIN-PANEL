@@ -1,8 +1,11 @@
 {
+  "homepage": "https://darshannayak19.github.io/MEAN-STACK-WEBSITE-WITH-ADMIN-PANEL",
   "name": "nodejs-user-registration",
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "node ./bin/www"
   },
   "dependencies": {
@@ -16,6 +19,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "express-validator": "^5.0.1",
+    "gh-pages": "^3.2.3",
     "gridfs-stream": "^1.1.1",
     "install": "^0.13.0",
     "mails": "^0.2.0",
