@@ -128,12 +128,21 @@ body{
   padding-top: 40px;
   padding-bottom: 40px;
 }
+.row1{
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
 iframe{
   width: 400px;
   height: 170px;
 }
 .columns{
-  justify-content: center;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .columns p{
   width: 350px;
@@ -141,6 +150,19 @@ iframe{
   font-size: 15px;
   color: black;
   font-weight: 700;
+}
+@media (max-width: 1200px) {
+  .row1{
+  flex-direction: column;
+  }
+  .row{
+    display: none;
+  }
+  .columns iframe{
+    margin: auto;
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
 }
 .btn-show-more{
   justify-content: center;
