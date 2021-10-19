@@ -1,11 +1,11 @@
 {
-  "homepage": "https://darshannayak19.github.io/MEAN-STACK-WEBSITE-WITH-ADMIN-PANEL",
   "name": "nodejs-user-registration",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "12.18.4"
+  },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "node ./bin/www"
   },
   "dependencies": {
